@@ -1,4 +1,4 @@
-package com.example.crypto_api.controller;
+package com.example.crypto_api.validation;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

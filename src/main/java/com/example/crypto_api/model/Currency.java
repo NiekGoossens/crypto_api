@@ -10,8 +10,8 @@ public class Currency {
     @Id
     private String ticker;
     private String name;
-    private Long number_of_coins;
-    private Long market_cap; // Market cap in USD
+    private Long numberOfCoins;
+    private Long marketCap; // Market cap in USD
 
     protected Currency() {
     }
@@ -19,8 +19,8 @@ public class Currency {
     private Currency(Builder builder) {
         this.ticker = builder.ticker;
         this.name = builder.name;
-        this.number_of_coins = builder.number_of_coins;
-        this.market_cap = builder.market_cap;
+        this.numberOfCoins = builder.numberOfCoins;
+        this.marketCap = builder.marketCap;
     }
 
     public String getTicker() {
@@ -32,18 +32,18 @@ public class Currency {
     }
 
     public Long getNumberOfCoins() {
-        return number_of_coins;
+        return numberOfCoins;
     }
 
     public Long getMarketCap() {
-        return market_cap;
+        return marketCap;
     }
 
     public static class Builder {
         private String ticker;
         private String name;
-        private Long number_of_coins = 0L; 
-        private Long market_cap = 0L; // Market cap in USD
+        private Long numberOfCoins = 0L;
+        private Long marketCap = 0L; // Market cap in USD
 
         public Builder setTicker(String ticker) {
             this.ticker = ticker;
@@ -55,13 +55,13 @@ public class Currency {
             return this;
         }
 
-        public Builder setNumberOfCoins(Long number_of_coins) {
-            this.number_of_coins = number_of_coins;
+        public Builder setNumberOfCoins(Long numberOfCoins) {
+            this.numberOfCoins = numberOfCoins;
             return this;
         }
 
-        public Builder setMarketCap(Long market_cap) {
-            this.market_cap = market_cap;
+        public Builder setMarketCap(Long marketCap) {
+            this.marketCap = marketCap;
             return this;
         }
 
