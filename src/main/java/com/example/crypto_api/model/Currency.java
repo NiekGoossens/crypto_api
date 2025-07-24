@@ -4,8 +4,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
+@ToString
 @Entity
 @Table(name = "currencies")
 public class Currency {
@@ -58,5 +60,4 @@ public class Currency {
             return new Currency(this);
         }
     }
-
 }
