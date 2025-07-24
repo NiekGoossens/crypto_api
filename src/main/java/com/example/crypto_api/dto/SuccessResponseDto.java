@@ -5,11 +5,11 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class ErrorResponseDto {
+public class SuccessResponseDto {
     private String message;
     private int status;
 
-    public ErrorResponseDto(String message, int status) {
+    public SuccessResponseDto(String message, int status) {
         this.message = message;
         this.status = status;
     }

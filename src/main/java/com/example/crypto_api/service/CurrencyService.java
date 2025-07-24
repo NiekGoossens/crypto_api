@@ -1,11 +1,8 @@
 package com.example.crypto_api.service;
 
-import java.util.List;
-import java.util.Map;
-
+import org.springframework.data.domain.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -13,6 +10,8 @@ import com.example.crypto_api.dto.CurrencyCreateDto;
 import com.example.crypto_api.dto.CurrencyUpdateDto;
 import com.example.crypto_api.model.Currency;
 import com.example.crypto_api.repository.CurrencyRepository;
+
+import org.springframework.data.domain.Pageable;
 
 @Service
 public class CurrencyService {
@@ -44,11 +43,11 @@ public class CurrencyService {
                 "Currency with ticker " + ticker + " not found"));
     }
 
-    public List<Currency> getAllCurrencies() {
+    public Page<Currency> getAllCurrencies(Pageable pageable) {
 
         // TODO Add pagination and sorting
 
-        return currencyRepository.findAll();
+        return currencyRepository.findAll(pageable);
     }
 
     public void deleteCurrency(String ticker) {
@@ -65,6 +64,8 @@ public class CurrencyService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
                         "Currency with ticker " + ticker + " not found"));
 
+
+        // Update the fields based on the DTO, keeping existing values if not provided
         Currency updatedCurrency = new Currency.Builder()
                 .setTicker(existingCurrency.getTicker()) // Ticker cannot be changed
                 .setName(dto.getName() != null ? dto.getName() : existingCurrency.getName())

@@ -1,12 +1,14 @@
 package com.example.crypto_api.controller;
 
-import java.util.List;
-import java.util.Map;
-
+import com.example.crypto_api.dto.SuccessResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Pageable;
 
 import com.example.crypto_api.dto.CurrencyCreateDto;
 import com.example.crypto_api.dto.CurrencyUpdateDto;
@@ -17,6 +19,7 @@ import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,8 +40,12 @@ public class CurrencyController {
     }
 
     @GetMapping
-    public List<Currency> getAllCurrencies() {
-        return currencyService.getAllCurrencies();
+    public Page<Currency> getAllCurrencies(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size,
+            @RequestParam(defaultValue = "ticker") String sortBy) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy).ascending());
+        return currencyService.getAllCurrencies(pageable);
     }
 
     @GetMapping("/{ticker}")
@@ -52,9 +59,9 @@ public class CurrencyController {
     }
 
     @DeleteMapping("/{ticker}")
-    public ResponseEntity<Map<String, String>> deleteCurrency(@PathVariable String ticker) {
+    public ResponseEntity<SuccessResponseDto> deleteCurrency(@PathVariable String ticker) {
         currencyService.deleteCurrency(ticker);
-        return ResponseEntity.ok(Map.of("message", "Currency with ticker " + ticker + " deleted successfully"));
+        return ResponseEntity.ok(new SuccessResponseDto("Successfully deleted " + ticker, 200));
     }
 
 }

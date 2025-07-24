@@ -3,7 +3,9 @@ package com.example.crypto_api.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Getter;
 
+@Getter
 @Entity
 @Table(name = "currencies")
 public class Currency {
@@ -21,22 +23,6 @@ public class Currency {
         this.name = builder.name;
         this.numberOfCoins = builder.numberOfCoins;
         this.marketCap = builder.marketCap;
-    }
-
-    public String getTicker() {
-        return ticker;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Long getNumberOfCoins() {
-        return numberOfCoins;
-    }
-
-    public Long getMarketCap() {
-        return marketCap;
     }
 
     public static class Builder {
