@@ -15,7 +15,6 @@ import com.example.crypto_api.repository.CurrencyRepository;
 import org.springframework.data.domain.Pageable;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Service
 public class CurrencyService {
@@ -25,6 +24,7 @@ public class CurrencyService {
 
     Logger logger = LoggerFactory.getLogger(CurrencyService.class);
 
+    // Create new currency
     public Currency createCurrency(CurrencyCreateDto dto) {
 
         // Check if currency with the same ticker already exists
@@ -49,6 +49,7 @@ public class CurrencyService {
         return saved;
     }
 
+    // Get specific currency
     public Currency getCurrency(String ticker) {
         Currency currency = currencyRepository.findById(ticker).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
                 "Currency with ticker " + ticker + " not found"));
@@ -57,11 +58,13 @@ public class CurrencyService {
         return currency;
     }
 
+    // Get all currencies using pagination and sort
     public Page<Currency> getAllCurrencies(Pageable pageable) {
         logger.info("Retrieving all currencies using the following options: {}", pageable);
         return currencyRepository.findAll(pageable);
     }
 
+    // Delete specific currency
     public void deleteCurrency(String ticker) {
         if (!currencyRepository.existsById(ticker)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
@@ -71,6 +74,7 @@ public class CurrencyService {
         logger.info("Deleted currency with ticker: {}", ticker);
     }
 
+    // Update specific currency
     public Currency updateCurrency(String ticker, CurrencyUpdateDto dto) {
         // Check if currency exists and retrieve it
         Currency existingCurrency = currencyRepository.findById(ticker)

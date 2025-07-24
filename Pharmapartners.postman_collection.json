@@ -1,0 +1,149 @@
+{
+	"info": {
+		"_postman_id": "40c44049-bdf6-4c40-a88c-946221afcce2",
+		"name": "Pharmapartners",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30810576"
+	},
+	"item": [
+		{
+			"name": "Create currency",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ticker\": \"TST\",\r\n    \"name\": \"TestCoin\",\r\n    \"numberOfCoins\": 1000,\r\n    \"marketCap\": 20000\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/currencies",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"currencies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update currency",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ticker\": \"BTC\",\r\n    \"name\": \"BTCoin\",\r\n    \"numberOfCoins\": 10,\r\n    \"marketCap\": 20\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/currencies/BTC",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"currencies",
+						"BTC"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get specific currency",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/currencies/BTC",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"currencies",
+						"BTC"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove currency",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/currencies/BTC",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"currencies",
+						"BTC"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get currencies",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/api/currencies",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"currencies"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "http://localhost:8080",
+			"type": "default"
+		}
+	]
+}
